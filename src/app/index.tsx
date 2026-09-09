@@ -1,98 +1,262 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+// ============================================================
+// MENUNEST - FIRST SCREEN
+// File: src/app/index.tsx
+//
+// Everything is kept in ONE file.
+//
+// This screen contains:
+// - Your logo/chef image
+// - MenuNest title
+// - Subtitle
+// - Enter button
+// - Your own arrow image
+// - No Expo Router "index" header
+// ============================================================
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import React from "react";
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+
+import { Stack, router } from "expo-router";
+
+
+// ============================================================
+// FIRST SCREEN
+// ============================================================
+
+export default function Index() {
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <>
+      {/* ======================================================
+          REMOVE THE WHITE "INDEX" HEADER
+      ====================================================== */}
+
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+      />
+
+
+      {/* ======================================================
+          MAIN CONTAINER
+          
+          justifyContent: "center" puts EVERYTHING in the
+          middle of the screen vertically.
+
+          alignItems: "center" puts EVERYTHING in the
+          middle horizontally.
+      ====================================================== */}
+
+      <View style={styles.container}>
+
+
+        {/* ====================================================
+            ⭐ YOUR IMAGE ⭐
+
+            Put your image here:
+
+            assets/images/Final-logo.png
+        ==================================================== */}
+
+        <Image
+          source={require("../../assets/images/Final-logo.png")}
+          style={styles.chefImage}
+          resizeMode="contain"
+        />
+
+
+        {/* ====================================================
+            MENUNEST TITLE
+        ==================================================== */}
+
+        <Text style={styles.logo}>
+          MenuNest
+        </Text>
+
+
+        {/* ====================================================
+            SUBTITLE
+        ==================================================== */}
+
+        <Text style={styles.subtitle}>
+          Manage. Organise. Serve
+        </Text>
+
+
+        {/* ====================================================
+            ENTER BUTTON
+        ==================================================== */}
+
+        <TouchableOpacity
+          style={styles.enterButton}
+          onPress={() => router.push("/dashboard")}
+          activeOpacity={0.8}
+        >
+
+          {/* Enter text */}
+
+          <Text style={styles.enterText}>
+            Enter
+          </Text>
+
+
+          {/* ==================================================
+              ⭐ YOUR BUTTON IMAGE ⭐
+
+              Put your arrow image here:
+
+              assets/images/arrow.png
+          ================================================== */}
+
+          <Image
+            source={require("../../assets/images/arrow.png")}
+            style={styles.arrowImage}
+            resizeMode="contain"
+          />
+
+        </TouchableOpacity>
+
+      </View>
+    </>
   );
 }
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
+// ============================================================
+// STYLES
+// ============================================================
 
 const styles = StyleSheet.create({
+
+  // ==========================================================
+  // MAIN SCREEN
+  // ==========================================================
+
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+
+    // Lime green background
+    backgroundColor: "#C5E887",
+
+    // ⭐ CENTER EVERYTHING VERTICALLY ⭐
+    justifyContent: "center",
+
+    // ⭐ CENTER EVERYTHING HORIZONTALLY ⭐
+    alignItems: "center",
+
+    // Prevents things from touching the sides
+    paddingHorizontal: 20,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+
+
+  // ==========================================================
+  // YOUR CHEF / LOGO IMAGE
+  // ==========================================================
+
+  chefImage: {
+    width: 210,
+    height: 210,
+
+    // Space between image and MenuNest
+    marginBottom: 15,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+
+
+  // ==========================================================
+  // MENUNEST TITLE
+  // ==========================================================
+
+  logo: {
+    fontSize: 42,
+
+    fontFamily: "Georgia",
+
+    fontWeight: "bold",
+
+    color: "#D92D61",
+
+    // Space between MenuNest and subtitle
+    marginBottom: 12,
   },
-  title: {
-    textAlign: 'center',
+
+
+  // ==========================================================
+  // SUBTITLE
+  // ==========================================================
+
+  subtitle: {
+    fontSize: 17,
+
+    color: "#171717",
+
+    // Space between subtitle and Enter button
+    marginBottom: 40,
   },
-  code: {
-    textTransform: 'uppercase',
+
+
+  // ==========================================================
+  // ENTER BUTTON
+  // ==========================================================
+
+  enterButton: {
+    width: 180,
+    height: 52,
+
+    // Yellow/orange button
+    backgroundColor: "#FFC83B",
+
+    // Black border
+    borderWidth: 1.5,
+    borderColor: "#111111",
+
+    // Rounded corners
+    borderRadius: 14,
+
+    // Put text and image beside each other
+    flexDirection: "row",
+
+    // Center vertically
+    alignItems: "center",
+
+    // Space text and arrow apart
+    justifyContent: "space-between",
+
+    // Inside spacing
+    paddingLeft: 35,
+    paddingRight: 15,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+
+
+  // ==========================================================
+  // ENTER TEXT
+  // ==========================================================
+
+  enterText: {
+    fontSize: 22,
+
+    fontFamily: "Irish Grover",
+
+    fontWeight: "bold",
+
+    color: "#111111",
   },
+
+
+  // ==========================================================
+  // BUTTON ARROW IMAGE
+  // ==========================================================
+
+  arrowImage: {
+    width: 22,
+    height: 22,
+  },
+
 });
