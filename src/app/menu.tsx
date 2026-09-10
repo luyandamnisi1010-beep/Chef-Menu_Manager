@@ -16,17 +16,7 @@ import {
   useLocalSearchParams,
 } from "expo-router";
 
-
-// ============================================================
-// COURSE TYPE
-// ============================================================
-
 type Course = "Starter" | "Main" | "Dessert";
-
-
-// ============================================================
-// DISH TYPE
-// ============================================================
 
 type Dish = {
   id: string;
@@ -38,22 +28,11 @@ type Dish = {
 };
 
 
-// ============================================================
-// SAVED DISHES
-// ============================================================
-
-// This keeps ALL dishes while the app is running.
-
 let savedDishes: Dish[] = [];
 
 
-// ============================================================
-// MENU SCREEN
-// ============================================================
-
 export default function MenuScreen() {
 
-  // Information coming from Add Dish
 
   const params = useLocalSearchParams<{
     added?: string;
@@ -65,33 +44,25 @@ export default function MenuScreen() {
   }>();
 
 
-  // All dishes
+
 
   const [dishes, setDishes] =
     useState<Dish[]>(savedDishes);
 
 
-  // Selected course
+
 
   const [selectedCourse, setSelectedCourse] =
     useState<Course | null>(null);
 
 
-  // Course dropdown
-
   const [showCourses, setShowCourses] =
     useState(false);
 
 
-  // Search box
-
   const [searchText, setSearchText] =
     useState("");
 
-
-  // ==========================================================
-  // RECEIVE NEW DISH
-  // ==========================================================
 
   useEffect(() => {
 
@@ -104,7 +75,6 @@ export default function MenuScreen() {
       params.image
     ) {
 
-      // Make sure the course is valid.
 
       if (
         params.course === "Starter" ||
@@ -129,8 +99,6 @@ export default function MenuScreen() {
         };
 
 
-        // Check if this exact dish already exists.
-
         const alreadyExists =
           savedDishes.some(
             (dish) =>
@@ -138,9 +106,6 @@ export default function MenuScreen() {
               dish.course === newDish.course &&
               dish.price === newDish.price
           );
-
-
-        // Add the dish WITHOUT removing old dishes.
 
         if (!alreadyExists) {
 
@@ -150,9 +115,6 @@ export default function MenuScreen() {
 
         }
 
-
-        // Automatically open the course
-        // that the new dish belongs to.
 
         setSelectedCourse(params.course);
       }
@@ -169,10 +131,6 @@ export default function MenuScreen() {
   ]);
 
 
-  // ==========================================================
-  // FILTER DISHES
-  // ==========================================================
-
   const filteredDishes =
     selectedCourse
       ? dishes.filter(
@@ -182,9 +140,6 @@ export default function MenuScreen() {
       : [];
 
 
-  // ==========================================================
-  // OPEN VIEW DISH
-  // ==========================================================
 
   const openDish = (dish: Dish) => {
 
@@ -211,15 +166,11 @@ export default function MenuScreen() {
   };
 
 
-  // ==========================================================
-  // SCREEN
-  // ==========================================================
-
   return (
 
     <View style={styles.container}>
 
-      {/* Hide default Expo header */}
+      {/*  */}
 
       <Stack.Screen
         options={{
@@ -228,9 +179,7 @@ export default function MenuScreen() {
       />
 
 
-      {/* ======================================================
-          HEADER
-          ====================================================== */}
+      {/*  */}
 
       <View style={styles.header}>
 
@@ -254,9 +203,7 @@ export default function MenuScreen() {
       </View>
 
 
-      {/* ======================================================
-          SEARCH
-          ====================================================== */}
+      {/*  */}
 
       <View style={styles.searchContainer}>
 
@@ -271,9 +218,7 @@ export default function MenuScreen() {
       </View>
 
 
-      {/* ======================================================
-          COURSE DROPDOWN
-          ====================================================== */}
+      {/*  */}
 
       <View style={styles.courseContainer}>
 
@@ -360,9 +305,7 @@ export default function MenuScreen() {
       </View>
 
 
-      {/* ======================================================
-          DISH LIST
-          ====================================================== */}
+      {/* */}
 
       <ScrollView
         style={styles.dishScroll}
@@ -380,12 +323,7 @@ export default function MenuScreen() {
 
           filteredDishes.map((dish) => (
 
-            /*
-             * THE ENTIRE CARD IS A BUTTON.
-             *
-             * Pressing the card opens View Dish.
-             */
-
+        
             <TouchableOpacity
               key={dish.id}
               style={[
@@ -404,9 +342,7 @@ export default function MenuScreen() {
               activeOpacity={0.7}
             >
 
-              {/* =================================================
-                  IMAGE
-                  ================================================= */}
+              {/*  */}
 
               <View style={styles.imageBox}>
 
@@ -420,9 +356,7 @@ export default function MenuScreen() {
               </View>
 
 
-              {/* =================================================
-                  DISH NAME
-                  ================================================= */}
+              {/**/}
 
               <Text
                 style={styles.dishName}
@@ -436,9 +370,7 @@ export default function MenuScreen() {
               </Text>
 
 
-              {/* =================================================
-                  COURSE
-                  ================================================= */}
+              {/*  */}
 
               <Text
                 style={styles.dishCourse}
@@ -450,9 +382,7 @@ export default function MenuScreen() {
               </Text>
 
 
-              {/* =================================================
-                  PRICE
-                  ================================================= */}
+              {/*  */}
 
               <Text
                 style={styles.dishPrice}
@@ -472,9 +402,7 @@ export default function MenuScreen() {
       </ScrollView>
 
 
-      {/* ======================================================
-          ADD DISH BUTTON
-          ====================================================== */}
+      {/*  */}
 
       <View style={styles.addButtonArea}>
 
@@ -499,15 +427,7 @@ export default function MenuScreen() {
 }
 
 
-// ============================================================
-// STYLES
-// ============================================================
-
 const styles = StyleSheet.create({
-
-  // ==========================================================
-  // SCREEN
-  // ==========================================================
 
   container: {
     flex: 1,
@@ -517,10 +437,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-
-  // ==========================================================
-  // HEADER
-  // ==========================================================
 
   header: {
     width: "100%",
@@ -573,11 +489,6 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
   },
 
-
-  // ==========================================================
-  // SEARCH
-  // ==========================================================
-
   searchContainer: {
     width: "88%",
 
@@ -605,10 +516,6 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
 
-
-  // ==========================================================
-  // COURSE
-  // ==========================================================
 
   courseContainer: {
     width: "88%",
@@ -661,11 +568,6 @@ const styles = StyleSheet.create({
     marginTop: -5,
   },
 
-
-  // ==========================================================
-  // DROPDOWN
-  // ==========================================================
-
   dropdown: {
     width: 180,
 
@@ -705,10 +607,6 @@ const styles = StyleSheet.create({
   },
 
 
-  // ==========================================================
-  // DISH SCROLL
-  // ==========================================================
-
   dishScroll: {
     width: "88%",
 
@@ -735,17 +633,6 @@ const styles = StyleSheet.create({
     marginTop: 35,
   },
 
-
-  // ==========================================================
-  // DISH CARD
-  // ==========================================================
-  //
-  // The card stays large.
-  //
-  // The CONTENT inside it is what has changed.
-  //
-  // ==========================================================
-
   dishCard: {
     width: "100%",
 
@@ -764,11 +651,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 
-
-  // ==========================================================
-  // CARD COLOURS
-  // ==========================================================
-
   mainCard: {
     backgroundColor: "#F19C99",
   },
@@ -783,15 +665,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#CCE5FF",
   },
 
-
-  // ==========================================================
-  // IMAGE
-  // ==========================================================
-  //
-  // THIS IS THE BIG CHANGE.
-  //
-  // The image is now small, like your reference picture.
-  // ==========================================================
 
   imageBox: {
     position: "absolute",
@@ -829,18 +702,6 @@ const styles = StyleSheet.create({
   },
 
 
-  // ==========================================================
-  // DISH NAME
-  // ==========================================================
-  //
-  // Starts directly beside the image.
-  //
-  // Bigger than the course.
-  //
-  // Bold.
-  //
-  // ALWAYS ONE LINE.
-  // ==========================================================
 
   dishName: {
     position: "absolute",
@@ -862,16 +723,6 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
 
-
-  // ==========================================================
-  // COURSE
-  // ==========================================================
-  //
-  // Directly underneath the dish name.
-  //
-  // Same size as the price.
-  // ==========================================================
-
   dishCourse: {
     position: "absolute",
 
@@ -890,16 +741,6 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
 
-
-  // ==========================================================
-  // PRICE
-  // ==========================================================
-  //
-  // Bottom-right.
-  //
-  // Same size as the course.
-  // ==========================================================
-
   dishPrice: {
     position: "absolute",
 
@@ -917,12 +758,6 @@ const styles = StyleSheet.create({
 
     includeFontPadding: false,
   },
-
-
-  // ==========================================================
-  // ADD BUTTON AREA
-  // ==========================================================
-
   addButtonArea: {
     width: "100%",
 
@@ -936,12 +771,6 @@ const styles = StyleSheet.create({
 
     paddingBottom: 5,
   },
-
-
-  // ==========================================================
-  // ADD BUTTON
-  // ==========================================================
-
   addButton: {
     width: "65%",
 

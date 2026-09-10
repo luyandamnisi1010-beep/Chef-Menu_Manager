@@ -15,28 +15,10 @@ import { Stack, router } from "expo-router";
 
 import * as ImagePicker from "expo-image-picker";
 
-
-// ============================================================
-// CHARACTER LIMITS
-// ============================================================
-//
-// CHANGE THE NUMBERS HERE IF YOU WANT DIFFERENT LIMITS.
-//
-
 const DISH_NAME_LIMIT = 30;
 const DESCRIPTION_LIMIT = 250;
 
-
-// ============================================================
-// COURSE TYPE
-// ============================================================
-
 type Course = "Starter" | "Main" | "Dessert";
-
-
-// ============================================================
-// ADD DISH SCREEN
-// ============================================================
 
 export default function AddDishScreen() {
 
@@ -57,11 +39,6 @@ export default function AddDishScreen() {
   const [courseOpen, setCourseOpen] =
     useState(false);
 
-
-  // ==========================================================
-  // ERROR STATES
-  // ==========================================================
-
   const [nameError, setNameError] =
     useState(false);
 
@@ -77,32 +54,20 @@ export default function AddDishScreen() {
   const [imageError, setImageError] =
     useState(false);
 
-
-  // ==========================================================
-  // POPUP
-  // ==========================================================
-
   const [popupVisible, setPopupVisible] =
     useState(false);
 
   const [success, setSuccess] =
     useState(false);
 
-
-  // ==========================================================
-  // PICK IMAGE
-  // ==========================================================
-
   const chooseImage = async () => {
 
     const permission =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-
     if (!permission.granted) {
       return;
     }
-
 
     const result =
       await ImagePicker.launchImageLibraryAsync({
@@ -117,7 +82,6 @@ export default function AddDishScreen() {
 
       });
 
-
     if (!result.canceled) {
 
       setImageUri(result.assets[0].uri);
@@ -127,30 +91,12 @@ export default function AddDishScreen() {
     }
   };
 
-
-  // ==========================================================
-  // DISH NAME
-  // ==========================================================
-  //
-  // Maximum = 30 characters.
-  //
-  // Numbers are removed.
-  //
-  // slice() makes sure the value itself never becomes
-  // longer than 30 characters.
-  // ==========================================================
-
   const handleDishNameChange = (
     text: string
   ) => {
 
-    // Remove numbers.
-
     const lettersAndSpaces =
       text.replace(/[0-9]/g, "");
-
-
-    // Limit the actual text to 30 characters.
 
     const limitedText =
       lettersAndSpaces.slice(
@@ -158,9 +104,7 @@ export default function AddDishScreen() {
         DISH_NAME_LIMIT
       );
 
-
     setDishName(limitedText);
-
 
     if (limitedText.trim() !== "") {
 
@@ -169,29 +113,12 @@ export default function AddDishScreen() {
     }
   };
 
-
-  // ==========================================================
-  // DESCRIPTION
-  // ==========================================================
-  //
-  // Maximum = 40 characters.
-  //
-  // Numbers are removed.
-  //
-  // The actual value is limited to 40 characters.
-  // ==========================================================
-
   const handleDescriptionChange = (
     text: string
   ) => {
 
-    // Remove numbers.
-
     const lettersAndSpaces =
       text.replace(/[0-9]/g, "");
-
-
-    // Limit the actual text to 40 characters.
 
     const limitedText =
       lettersAndSpaces.slice(
@@ -199,9 +126,7 @@ export default function AddDishScreen() {
         DESCRIPTION_LIMIT
       );
 
-
     setDescription(limitedText);
-
 
     if (limitedText.trim() !== "") {
 
@@ -210,19 +135,9 @@ export default function AddDishScreen() {
     }
   };
 
-
-  // ==========================================================
-  // ADD DISH
-  // ==========================================================
-
   const handleAddDish = () => {
 
     let hasError = false;
-
-
-    // --------------------------------------------------------
-    // DISH NAME
-    // --------------------------------------------------------
 
     if (dishName.trim() === "") {
 
@@ -236,11 +151,6 @@ export default function AddDishScreen() {
 
     }
 
-
-    // --------------------------------------------------------
-    // COURSE
-    // --------------------------------------------------------
-
     if (!course) {
 
       setCourseError(true);
@@ -252,11 +162,6 @@ export default function AddDishScreen() {
       setCourseError(false);
 
     }
-
-
-    // --------------------------------------------------------
-    // DESCRIPTION
-    // --------------------------------------------------------
 
     if (description.trim() === "") {
 
@@ -270,11 +175,6 @@ export default function AddDishScreen() {
 
     }
 
-
-    // --------------------------------------------------------
-    // PRICE
-    // --------------------------------------------------------
-
     if (price.trim() === "") {
 
       setPriceError(true);
@@ -286,11 +186,6 @@ export default function AddDishScreen() {
       setPriceError(false);
 
     }
-
-
-    // --------------------------------------------------------
-    // IMAGE
-    // --------------------------------------------------------
 
     if (!imageUri) {
 
@@ -304,11 +199,6 @@ export default function AddDishScreen() {
 
     }
 
-
-    // --------------------------------------------------------
-    // ERROR POPUP
-    // --------------------------------------------------------
-
     if (hasError) {
 
       setSuccess(false);
@@ -319,32 +209,17 @@ export default function AddDishScreen() {
 
     }
 
-
-    // --------------------------------------------------------
-    // SUCCESS POPUP
-    // --------------------------------------------------------
-
     setSuccess(true);
 
     setPopupVisible(true);
 
   };
 
-
-  // ==========================================================
-  // OK BUTTON
-  // ==========================================================
-
   const handleOkay = () => {
 
     setPopupVisible(false);
 
   };
-
-
-  // ==========================================================
-  // BACK BUTTON
-  // ==========================================================
 
   const handleBack = () => {
 
@@ -380,15 +255,9 @@ export default function AddDishScreen() {
 
     }
 
-
     router.back();
 
   };
-
-
-  // ==========================================================
-  // SCREEN
-  // ==========================================================
 
   return (
 
@@ -400,17 +269,11 @@ export default function AddDishScreen() {
         }}
       />
 
-
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-
-
-        {/* ====================================================
-            HEADER
-            ==================================================== */}
 
         <View style={styles.header}>
 
@@ -426,24 +289,17 @@ export default function AddDishScreen() {
 
           </TouchableOpacity>
 
-
           <Text style={styles.title}>
             Add Menu Item
           </Text>
 
         </View>
 
-
-        {/* ====================================================
-            DISH NAME
-            ==================================================== */}
-
         <View style={styles.field}>
 
           <Text style={styles.label}>
             Dish Name:
           </Text>
-
 
           <View
             style={[
@@ -464,17 +320,11 @@ export default function AddDishScreen() {
 
               placeholderTextColor="#999999"
 
-              // Keeps the dish name on ONE line.
-
               numberOfLines={1}
-
-              // Prevents more than 30 characters
-              // from being entered.
 
               maxLength={DISH_NAME_LIMIT}
 
             />
-
 
             {nameError && (
 
@@ -486,15 +336,11 @@ export default function AddDishScreen() {
 
           </View>
 
-
-          {/* CHARACTER COUNTER */}
-
           <Text style={styles.characterCounter}>
 
             {dishName.length}/{DISH_NAME_LIMIT} characters
 
           </Text>
-
 
           {nameError && (
 
@@ -506,17 +352,11 @@ export default function AddDishScreen() {
 
         </View>
 
-
-        {/* ====================================================
-            COURSE
-            ==================================================== */}
-
         <View style={styles.field}>
 
           <Text style={styles.label}>
             Course:
           </Text>
-
 
           <TouchableOpacity
 
@@ -535,11 +375,9 @@ export default function AddDishScreen() {
               {course || "Select Course"}
             </Text>
 
-
             <Text style={styles.arrow}>
               ▼
             </Text>
-
 
             {courseError && (
 
@@ -550,9 +388,6 @@ export default function AddDishScreen() {
             )}
 
           </TouchableOpacity>
-
-
-          {/* DROPDOWN */}
 
           {courseOpen && (
 
@@ -580,7 +415,6 @@ export default function AddDishScreen() {
 
               </TouchableOpacity>
 
-
               <TouchableOpacity
 
                 style={styles.option}
@@ -602,7 +436,6 @@ export default function AddDishScreen() {
                 </Text>
 
               </TouchableOpacity>
-
 
               <TouchableOpacity
 
@@ -630,7 +463,6 @@ export default function AddDishScreen() {
 
           )}
 
-
           {courseError && (
 
             <Text style={styles.emptyText}>
@@ -641,17 +473,11 @@ export default function AddDishScreen() {
 
         </View>
 
-
-        {/* ====================================================
-            DESCRIPTION
-            ==================================================== */}
-
         <View style={styles.field}>
 
           <Text style={styles.label}>
             Description:
           </Text>
-
 
           <View
             style={[
@@ -676,17 +502,11 @@ export default function AddDishScreen() {
 
               onChangeText={handleDescriptionChange}
 
-              // Maximum 40 characters.
-
               maxLength={DESCRIPTION_LIMIT}
-
-              // Allows the text inside this field
-              // to scroll vertically.
 
               scrollEnabled={true}
 
             />
-
 
             {descriptionError && (
 
@@ -698,15 +518,11 @@ export default function AddDishScreen() {
 
           </View>
 
-
-          {/* CHARACTER COUNTER */}
-
           <Text style={styles.characterCounter}>
 
             {description.length}/{DESCRIPTION_LIMIT} characters
 
           </Text>
-
 
           {descriptionError && (
 
@@ -718,17 +534,11 @@ export default function AddDishScreen() {
 
         </View>
 
-
-        {/* ====================================================
-            PRICE
-            ==================================================== */}
-
         <View style={styles.field}>
 
           <Text style={styles.label}>
             Price:
           </Text>
-
 
           <View
             style={[
@@ -740,7 +550,6 @@ export default function AddDishScreen() {
             <Text style={styles.currency}>
               R
             </Text>
-
 
             <TextInput
 
@@ -759,9 +568,7 @@ export default function AddDishScreen() {
                 const numbersOnly =
                   text.replace(/[^0-9]/g, "");
 
-
                 setPrice(numbersOnly);
-
 
                 if (
                   numbersOnly.trim() !== ""
@@ -775,7 +582,6 @@ export default function AddDishScreen() {
 
             />
 
-
             {priceError && (
 
               <Text style={styles.exclamation}>
@@ -785,7 +591,6 @@ export default function AddDishScreen() {
             )}
 
           </View>
-
 
           {priceError && (
 
@@ -797,17 +602,11 @@ export default function AddDishScreen() {
 
         </View>
 
-
-        {/* ====================================================
-            IMAGE
-            ==================================================== */}
-
         <View style={styles.field}>
 
           <Text style={styles.label}>
             Image:
           </Text>
-
 
           <TouchableOpacity
 
@@ -840,7 +639,6 @@ export default function AddDishScreen() {
 
             )}
 
-
             {imageError && (
 
               <Text style={styles.imageExclamation}>
@@ -851,7 +649,6 @@ export default function AddDishScreen() {
 
           </TouchableOpacity>
 
-
           {imageError && (
 
             <Text style={styles.emptyText}>
@@ -861,11 +658,6 @@ export default function AddDishScreen() {
           )}
 
         </View>
-
-
-        {/* ====================================================
-            ADD DISH BUTTON
-            ==================================================== */}
 
         <TouchableOpacity
 
@@ -882,11 +674,6 @@ export default function AddDishScreen() {
         </TouchableOpacity>
 
       </ScrollView>
-
-
-      {/* ======================================================
-          POPUP
-          ====================================================== */}
 
       <Modal
 
@@ -910,7 +697,6 @@ export default function AddDishScreen() {
               MenuNest
             </Text>
 
-
             <Text style={styles.popupMessage}>
 
               {success
@@ -919,7 +705,6 @@ export default function AddDishScreen() {
 
             </Text>
 
-
             <Text style={styles.popupSmallText}>
 
               {success
@@ -927,7 +712,6 @@ export default function AddDishScreen() {
                 : "Please fill in the empty fields"}
 
             </Text>
-
 
             <TouchableOpacity
 
@@ -953,11 +737,6 @@ export default function AddDishScreen() {
   );
 }
 
-
-// ============================================================
-// STYLES
-// ============================================================
-
 const styles = StyleSheet.create({
 
   container: {
@@ -965,11 +744,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#EFE7D2",
   },
 
-
   scroll: {
     flex: 1,
   },
-
 
   content: {
     flexGrow: 1,
@@ -978,11 +755,6 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 25,
   },
-
-
-  // ==========================================================
-  // HEADER
-  // ==========================================================
 
   header: {
     width: "88%",
@@ -993,7 +765,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-
   backButton: {
     position: "absolute",
     left: 0,
@@ -1003,13 +774,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-
   backImage: {
     width: 30,
     height: 30,
     resizeMode: "contain",
   },
-
 
   title: {
     fontSize: 26,
@@ -1018,16 +787,10 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
   },
 
-
-  // ==========================================================
-  // FIELDS
-  // ==========================================================
-
   field: {
     width: "88%",
     marginBottom: 8,
   },
-
 
   label: {
     fontSize: 16,
@@ -1035,7 +798,6 @@ const styles = StyleSheet.create({
     color: "#000000",
     marginBottom: 4,
   },
-
 
   inputBox: {
     width: "100%",
@@ -1045,7 +807,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-
   input: {
     flex: 1,
     paddingHorizontal: 10,
@@ -1054,12 +815,10 @@ const styles = StyleSheet.create({
     paddingRight: 35,
   },
 
-
   errorBox: {
     borderWidth: 1,
     borderColor: "#000000",
   },
-
 
   exclamation: {
     position: "absolute",
@@ -1069,7 +828,6 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
 
-
   emptyText: {
     fontSize: 10,
     color: "#000000",
@@ -1077,11 +835,6 @@ const styles = StyleSheet.create({
     marginTop: 1,
     fontStyle: "italic",
   },
-
-
-  // ==========================================================
-  // CHARACTER COUNTER
-  // ==========================================================
 
   characterCounter: {
     fontSize: 10,
@@ -1091,17 +844,11 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
 
-
-  // ==========================================================
-  // COURSE
-  // ==========================================================
-
   courseText: {
     textAlign: "center",
     fontSize: 16,
     color: "#000000",
   },
-
 
   arrow: {
     position: "absolute",
@@ -1109,7 +856,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#000000",
   },
-
 
   dropdown: {
     width: "100%",
@@ -1121,7 +867,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 
-
   option: {
     height: 42,
     justifyContent: "center",
@@ -1130,17 +875,11 @@ const styles = StyleSheet.create({
     borderBottomColor: "#000000",
   },
 
-
   optionText: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#000000",
   },
-
-
-  // ==========================================================
-  // DESCRIPTION
-  // ==========================================================
 
   descriptionBox: {
     width: "100%",
@@ -1149,7 +888,6 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     overflow: "hidden",
   },
-
 
   descriptionInput: {
     flex: 1,
@@ -1160,11 +898,6 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
 
-
-  // ==========================================================
-  // PRICE
-  // ==========================================================
-
   priceBox: {
     width: "100%",
     height: 43,
@@ -1174,7 +907,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-
   currency: {
     fontSize: 17,
     fontWeight: "bold",
@@ -1183,7 +915,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 
-
   priceInput: {
     flex: 1,
     height: "100%",
@@ -1191,11 +922,6 @@ const styles = StyleSheet.create({
     color: "#000000",
     paddingHorizontal: 2,
   },
-
-
-  // ==========================================================
-  // IMAGE
-  // ==========================================================
 
   imageBox: {
     width: "100%",
@@ -1207,19 +933,16 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 
-
   selectedImage: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
   },
 
-
   imagePlaceholder: {
     fontSize: 14,
     color: "#777777",
   },
-
 
   imageExclamation: {
     position: "absolute",
@@ -1229,11 +952,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000000",
   },
-
-
-  // ==========================================================
-  // ADD BUTTON
-  // ==========================================================
 
   addButton: {
     width: "65%",
@@ -1247,7 +965,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-
   addButtonText: {
     fontSize: 18,
     fontWeight: "bold",
@@ -1255,18 +972,12 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
   },
 
-
-  // ==========================================================
-  // POPUP
-  // ==========================================================
-
   modalBackground: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.20)",
   },
-
 
   popup: {
     width: 320,
@@ -1280,7 +991,6 @@ const styles = StyleSheet.create({
     padding: 22,
   },
 
-
   popupTitle: {
     fontSize: 27,
     fontWeight: "bold",
@@ -1288,7 +998,6 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
     marginBottom: 20,
   },
-
 
   popupMessage: {
     fontSize: 18,
@@ -1298,14 +1007,12 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-
   popupSmallText: {
     fontSize: 12,
     color: "#000000",
     textAlign: "center",
     marginBottom: 20,
   },
-
 
   okButton: {
     width: 90,
@@ -1318,7 +1025,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-
   okText: {
     fontSize: 18,
     fontWeight: "bold",
@@ -1326,4 +1032,4 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
   },
 
-});
+}); 

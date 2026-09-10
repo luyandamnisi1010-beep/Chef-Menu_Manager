@@ -1,19 +1,3 @@
-// ============================================================
-// MENUNEST - DASHBOARD SCREEN
-// File: src/app/dashboard.tsx
-//
-// Everything for the Dashboard is in this ONE file.
-//
-// This screen contains:
-// - Dashboard title
-// - Dashboard image
-// - Welcome message
-// - Description
-// - Callout text
-// - View Menu button
-// - Statistics button
-// ============================================================
-
 import React from "react";
 
 import {
@@ -27,17 +11,12 @@ import {
 import { Stack, router } from "expo-router";
 
 
-// ============================================================
-// DASHBOARD SCREEN
-// ============================================================
 
 export default function Dashboard() {
 
   return (
     <>
-      {/* ======================================================
-          REMOVE THE WHITE EXPO ROUTER HEADER
-      ====================================================== */}
+      {/*  */}
 
       <Stack.Screen
         options={{
@@ -46,41 +25,19 @@ export default function Dashboard() {
       />
 
 
-      {/* ======================================================
-          MAIN DASHBOARD CONTAINER
-
-          justifyContent: "center"
-          = centers everything vertically
-
-          alignItems: "center"
-          = centers everything horizontally
-      ====================================================== */}
+      {/*  */}
 
       <View style={styles.container}>
 
 
-        {/* ====================================================
-            DASHBOARD TITLE
-        ==================================================== */}
+        {/*  */}
 
         <Text style={styles.title}>
           Dashboard
         </Text>
 
 
-        {/* ====================================================
-            ⭐ YOUR DASHBOARD IMAGE ⭐
-
-            Your image should be located at:
-
-            assets/images/Dashboard.png
-
-            Because this file is inside:
-
-            src/app/dashboard.tsx
-
-            we use ../../ to reach the project folder.
-        ==================================================== */}
+        {/* */}
 
         <Image
           source={require("../../assets/images/Dashboard.png")}
@@ -89,18 +46,14 @@ export default function Dashboard() {
         />
 
 
-        {/* ====================================================
-            WELCOME TEXT
-        ==================================================== */}
+        {/*  */}
 
         <Text style={styles.welcome}>
           Welcome to MenuNest,
         </Text>
 
 
-        {/* ====================================================
-            DESCRIPTION
-        ==================================================== */}
+        {/*  */}
 
         <Text style={styles.description}>
           Keep your menu fresh, organised, and ready to serve.
@@ -109,20 +62,14 @@ export default function Dashboard() {
         </Text>
 
 
-        {/* ====================================================
-            CALLOUT
-        ==================================================== */}
+        {/*  */}
 
         <Text style={styles.callout}>
           All in one place. Let's get organised!
         </Text>
 
 
-        {/* ====================================================
-            VIEW MENU BUTTON
-
-            This button will take us to the Menu screen.
-        ==================================================== */}
+        {/*  */}
 
         <TouchableOpacity
           style={styles.viewMenuButton}
@@ -137,13 +84,7 @@ export default function Dashboard() {
         </TouchableOpacity>
 
 
-        {/* ====================================================
-            STATISTICS BUTTON
-
-            This is currently inactive.
-
-            We are only making it look like the design.
-        ==================================================== */}
+        {/*  */}
 
         <TouchableOpacity
           style={styles.statisticsButton}
@@ -163,46 +104,28 @@ export default function Dashboard() {
 }
 
 
-// ============================================================
-// STYLES
-// ============================================================
-
 const styles = StyleSheet.create({
-
-  // ==========================================================
-  // MAIN SCREEN
-  // ==========================================================
-
   container: {
     flex: 1,
 
-    // Cream background
     backgroundColor: "#EFE7D2",
 
-    // ⭐ CENTER EVERYTHING VERTICALLY ⭐
+   
     justifyContent: "center",
 
-    // ⭐ CENTER EVERYTHING HORIZONTALLY ⭐
+  
     alignItems: "center",
 
-    // Prevent content from touching the phone edges
     paddingHorizontal: 25,
   },
 
 
-  // ==========================================================
-  // DASHBOARD TITLE
-  // ==========================================================
-
   title: {
     fontSize: 38,
-
-    // Serif font
     fontFamily: "Georgia",
 
     fontWeight: "bold",
 
-    // Red/pink colour
     color: "#D92D61",
 
     textAlign: "center",
@@ -211,22 +134,13 @@ const styles = StyleSheet.create({
   },
 
 
-  // ==========================================================
-  // DASHBOARD IMAGE
-  // ==========================================================
-
   dashboardImage: {
     width: 150,
     height: 150,
 
-    // Space below image
     marginBottom: 12,
   },
 
-
-  // ==========================================================
-  // WELCOME TEXT
-  // ==========================================================
 
   welcome: {
     fontSize: 24,
@@ -243,10 +157,6 @@ const styles = StyleSheet.create({
   },
 
 
-  // ==========================================================
-  // DESCRIPTION
-  // ==========================================================
-
   description: {
     fontSize: 15,
 
@@ -262,10 +172,6 @@ const styles = StyleSheet.create({
   },
 
 
-  // ==========================================================
-  // CALLOUT
-  // ==========================================================
-
   callout: {
     fontSize: 15,
 
@@ -278,35 +184,23 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
 
-
-  // ==========================================================
-  // VIEW MENU BUTTON
-  // ==========================================================
-
   viewMenuButton: {
     width: 210,
     height: 50,
 
-    // Pink button
     backgroundColor: "#F76C82",
 
-    // Black border
     borderWidth: 1.5,
     borderColor: "#111111",
 
     borderRadius: 14,
 
-    // Center text
     alignItems: "center",
     justifyContent: "center",
 
     marginBottom: 12,
   },
 
-
-  // ==========================================================
-  // VIEW MENU TEXT
-  // ==========================================================
 
   viewMenuText: {
     fontSize: 19,
@@ -319,32 +213,21 @@ const styles = StyleSheet.create({
   },
 
 
-  // ==========================================================
-  // STATISTICS BUTTON
-  // ==========================================================
 
   statisticsButton: {
     width: 210,
     height: 50,
 
-    // Light mint green
     backgroundColor: "#CBEED6",
 
-    // Black border
     borderWidth: 1.5,
     borderColor: "#111111",
 
     borderRadius: 14,
 
-    // Center text
     alignItems: "center",
     justifyContent: "center",
   },
-
-
-  // ==========================================================
-  // STATISTICS TEXT
-  // ==========================================================
 
   statisticsText: {
     fontSize: 19,

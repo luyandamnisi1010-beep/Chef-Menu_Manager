@@ -10,7 +10,6 @@ import {
 import { Stack, router, useLocalSearchParams } from "expo-router";
 
 export default function ViewMenuScreen() {
-  // Get the dish information sent from the Menu screen
   const params = useLocalSearchParams<{
     name?: string;
     description?: string;
@@ -20,10 +19,10 @@ export default function ViewMenuScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Hide the normal Expo header */}
+      {/* */}
       <Stack.Screen options={{ headerShown: false }} />
 
-      {/* Back button and title */}
+      {/*  */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -35,13 +34,13 @@ export default function ViewMenuScreen() {
         <Text style={styles.title}>View Menu Item</Text>
       </View>
 
-      {/* Everything below can scroll if needed */}
+      {/*  */}
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {/* Dish image */}
+        {/* */}
         <View style={styles.imageBox}>
           {params.image ? (
             <Image
@@ -54,25 +53,25 @@ export default function ViewMenuScreen() {
           )}
         </View>
 
-        {/* Dish information */}
+        {/*  */}
         <View style={styles.infoCard}>
-          {/* Dish name */}
+          {/* */}
           <Text style={styles.dishName}>
             {params.name || "Dish Name"}
           </Text>
 
-          {/* Price */}
+          {/*  */}
           <Text style={styles.price}>
             R{params.price || "0.00"}
           </Text>
 
-          {/* Description */}
+          {/*  */}
           <Text style={styles.description}>
             {params.description || "No description added."}
           </Text>
         </View>
 
-        {/* Edit and Delete buttons */}
+        {/* */}
         <View style={styles.buttonRow}>
           {/* These buttons intentionally do NOTHING for now */}
           <TouchableOpacity style={styles.editButton}>
@@ -89,7 +88,7 @@ export default function ViewMenuScreen() {
 }
 
 const styles = StyleSheet.create({
-  // Main cream background
+ 
   container: {
     flex: 1,
     backgroundColor: "#EFE7D2",
@@ -98,7 +97,6 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
   },
 
-  // Header
   header: {
     width: "100%",
     height: 55,
@@ -110,7 +108,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 
-  // Back button
   backButton: {
     position: "absolute",
     left: 5,
@@ -120,14 +117,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  // Back arrow
   backArrow: {
     fontSize: 34,
     color: "#000000",
     lineHeight: 36,
   },
 
-  // Page title
   title: {
     fontSize: 23,
     fontWeight: "bold",
@@ -135,14 +130,11 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
   },
 
-  // Scroll area
   scrollView: {
     flex: 1,
     width: "100%",
   },
 
-  // Keeps everything centered
-  // Keeps the image, card and buttons centered vertically
 content: {
   flexGrow: 1,
   alignItems: "center",
@@ -151,7 +143,6 @@ content: {
   marginBottom: 60,
 },
 
-  // Large image area
  imageBox: {
   width: "92%",
   height: 220,
@@ -166,19 +157,16 @@ borderColor: "#070000",
 borderWidth: 1,
 },
 
-  // Dish image
   dishImage: {
     width: "100%",
     height: "100%",
   },
 
-  // If there is no image
   noImageText: {
     fontSize: 16,
     color: "#777777",
   },
 
-  // Pink information card
   infoCard: {
     width: "92%",
     minHeight: 200,
@@ -193,7 +181,6 @@ borderWidth: 1,
     marginTop: 10,
   },
 
-  // Dish name
   dishName: {
     fontSize: 18,
     fontWeight: "bold",
@@ -201,7 +188,6 @@ borderWidth: 1,
     paddingRight: 75,
   },
 
-  // Price in the top-right
   price: {
     position: "absolute",
     right: 10,
@@ -211,7 +197,6 @@ borderWidth: 1,
     color: "#000000",
   },
 
-  // Description
   description: {
     fontSize: 15,
     lineHeight: 19,
@@ -221,7 +206,6 @@ borderWidth: 1,
     paddingHorizontal: 3,
   },
 
-  // Buttons stay close together
   buttonRow: {
     flexDirection: "row",
     justifyContent: "center",
@@ -231,7 +215,6 @@ borderWidth: 1,
     gap: 18,
   },
 
-  // Edit button
   editButton: {
     width: 101,
     height: 40,
@@ -243,15 +226,12 @@ borderWidth: 1,
     alignItems: "center",
   },
 
-  // Edit text
   editText: {
     fontSize: 21,
     fontWeight: "bold",
     color: "#000000",
     fontFamily: "serif",
   },
-
-  // Delete button
   deleteButton: {
     width: 101,
     height: 40,
@@ -262,8 +242,6 @@ borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-
-  // Delete text
   deleteText: {
     fontSize: 21,
     fontWeight: "bold",
