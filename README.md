@@ -60,3 +60,8 @@ The screen also includes:
 - Expo Router
 - Expo Image Picker
 - Expo Font
+# Links 
+### YouTube
+- [YouTube video](https://youtu.be/aMZnBvPGAZQ)
+###GitHub
+- [GitHub LiNK](https://github.com/luyandamnisi1010-beep/Chef-Menu_Manager.git)
