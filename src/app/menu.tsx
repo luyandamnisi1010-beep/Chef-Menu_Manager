@@ -27,18 +27,7 @@ export type Dish = {
 
 export let savedDishes: Dish[] = [];
 
-export default function MenuScreen() {
-  const params = useLocalSearchParams<{
-    added?: string;
-    updated?: string;
-    deleted?: string;
-    id?: string;
-    dishName?: string;
-    course?: string;
-    description?: string;
-    price?: string;
-    image?: string;
-  }>();
+e
 
   const [dishes, setDishes] = useState<Dish[]>(savedDishes);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
