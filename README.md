@@ -60,6 +60,17 @@ The screen also includes:
 - Expo Router
 - Expo Image Picker
 - Expo Font
+## What Changed Since Part 2?
+Since Part 2, I added a lot of cool new features and fixed bugs to make the app work smoothly. Here is a table showing all the changes I made and what I fixed during refactoring:
+
+| Part / Feature | What I Changed & Fixed |
+| :--- | :--- |
+| **Dashboard Statistics Button** | I connected the Statistics button on the dashboard so that when I press it, it opens up the stats view smoothly. |
+| **Statistics Screen Design** | I added a pastel blue background, a coral pink menu overview card, and light lavender information panels, with no emojis or messy icons. |
+| **Real Menu Calculations** | I made sure the statistics screen reads real menu items from my app so it counts total items, average price in Rands, and items per course correctly. |
+| **Navigation Fixes** | I fixed a bug where pressing back kept opening multiple menu screens. Now, pressing the back arrow takes me straight back to the dashboard. |
+| **Unique Key Bug Fix** | I fixed an error where React got confused by duplicate dish keys by making sure every dish gets a unique ID when I add it. |
+| **Code Refactoring** | I cleaned up my code, removed emojis, replaced them with clean text labels like Starter, Main, and Dessert, and organized everything nicely. |
 # Links 
 ### YouTube
 - [YouTube video](https://youtu.be/aMZnBvPGAZQ)
