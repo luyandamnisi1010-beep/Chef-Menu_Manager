@@ -36,20 +36,6 @@ export default function AddDishScreen() {
   const [imageUri, setImageUri] =
     useState<string | null>(null);
 
-  const [courseOpen, setCourseOpen] =
-    useState(false);
-
-  const [nameError, setNameError] =
-    useState(false);
-
-  const [courseError, setCourseError] =
-    useState(false);
-
-  const [descriptionError, setDescriptionError] =
-    useState(false);
-
-  const [priceError, setPriceError] =
-    useState(false);
 
   const [priceErrorMessage, setPriceErrorMessage] =
     useState("Field is empty");
