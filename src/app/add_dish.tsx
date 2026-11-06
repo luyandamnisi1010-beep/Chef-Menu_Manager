@@ -36,20 +36,9 @@ export default function AddDishScreen() {
   const [imageUri, setImageUri] =
     useState<string | null>(null);
 
-  const [courseOpen, setCourseOpen] =
-    useState(false);
 
-  const [nameError, setNameError] =
-    useState(false);
-
-  const [courseError, setCourseError] =
-    useState(false);
-
-  const [descriptionError, setDescriptionError] =
-    useState(false);
-
-  const [priceError, setPriceError] =
-    useState(false);
+  const [priceErrorMessage, setPriceErrorMessage] =
+    useState("Field is empty");
 
   const [imageError, setImageError] =
     useState(false);
@@ -177,13 +166,29 @@ export default function AddDishScreen() {
 
     if (price.trim() === "") {
 
+      setPriceErrorMessage("Field is empty");
+
       setPriceError(true);
 
       hasError = true;
 
     } else {
 
-      setPriceError(false);
+      const numericPrice = parseFloat(price);
+
+      if (isNaN(numericPrice) || numericPrice <= 0) {
+
+        setPriceErrorMessage("Dish price must be greater than R0.00.");
+
+        setPriceError(true);
+
+        hasError = true;
+
+      } else {
+
+        setPriceError(false);
+
+      }
 
     }
 
@@ -574,7 +579,13 @@ export default function AddDishScreen() {
                   numbersOnly.trim() !== ""
                 ) {
 
-                  setPriceError(false);
+                  const numericPrice = parseFloat(numbersOnly);
+
+                  if (!isNaN(numericPrice) && numericPrice > 0) {
+
+                    setPriceError(false);
+
+                  }
 
                 }
 
@@ -595,7 +606,7 @@ export default function AddDishScreen() {
           {priceError && (
 
             <Text style={styles.emptyText}>
-              Field is empty
+              {priceErrorMessage}
             </Text>
 
           )}
