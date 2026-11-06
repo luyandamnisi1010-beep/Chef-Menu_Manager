@@ -73,7 +73,7 @@ Since Part 2, I added a lot of cool new features and fixed bugs to make the app 
 | **Code Refactoring** | I cleaned up my code, removed emojis, replaced them with clean text labels like Starter, Main, and Dessert, and organized everything nicely. |
 # Links 
 ### YouTube
-- [YouTube video](https://youtu.be/aMZnBvPGAZQ)
+- [YouTube video](https://youtu.be/2EBxsVJ6YDE)
 - Change quality to 1080p60
 ### GitHub
-- [GitHub LiNK](https://github.com/luyandamnisi1010-beep/Chef-Menu_Manager.git)
+- [GitHub Link](https://github.com/luyandamnisi1010-beep/Chef-Menu_Manager.git)
